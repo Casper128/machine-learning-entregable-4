@@ -112,13 +112,6 @@ Se usó k = 11 sobre TF-IDF + SVD (100 componentes, que conservan 27,9 % de la v
  
 **Recomendación.** Usar LinearSVC como clasificador principal con revisión humana de las alertas, y emplear los grupos y tópicos como herramienta de análisis y priorización, no como detector.
  
-### Limitaciones
- 
-- Las etiquetas reflejan solo el fraude ya detectado; puede haber fraude no etiquetado en el conjunto.
-- El lenguaje de las estafas cambia con el tiempo, por lo que el modelo requeriría reentrenamiento periódico.
-- SVD conserva solo 27,9 % de la varianza; t-SNE y UMAP sirven para visualizar, pero deforman distancias y no deben leerse como separación real.
-- Ward se calcula sobre una muestra por su costo de memoria O(n²), y la estabilidad medida (ARI = 0,578) no cubre toda la cadena TF-IDF/SVD.
-- Con 171 fraudes en prueba, una diferencia de 4 detecciones es pequeña y debe tomarse con cautela.
 ## Fuentes
  
 - Dataset: [Real or Fake Job Posting Prediction, Kaggle (shivamb)](https://www.kaggle.com/datasets/shivamb/real-or-fake-fake-jobposting-prediction). SHA-256 del CSV en `data/README.md`.
