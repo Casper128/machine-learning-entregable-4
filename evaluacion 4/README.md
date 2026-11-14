@@ -39,7 +39,7 @@ En Windows activar el entorno con `.venv\Scripts\activate`. En Jupyter elegir el
 
 ## Resultados verificados
 
-Modelo seleccionado por validación: **LinearSVC** (AP CV 0.875). En prueba: 3520 ofertas, 171 fraudes; TP=151, FN=20, FP=33, TN=3316.
+Modelo seleccionado por validación: **LinearSVC** (AP 0.875 en la búsqueda de hiperparámetros de 3 pliegues; no es comparable con el AP de 5 pliegues de la comparación inicial, p. ej. 0.909). En prueba: 3520 ofertas, 171 fraudes; TP=151, FN=20, FP=33, TN=3316.
 
 | modelo | umbral | precision | recall | f1 | pr_auc | roc_auc |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -49,9 +49,9 @@ Modelo seleccionado por validación: **LinearSVC** (AP CV 0.875). En prueba: 352
 | LinearSVC (texto+estructurado) | umbral por defecto | 0.907 | 0.860 | 0.883 | 0.930 | 0.992 |
 | LinearSVC (texto+estructurado) | umbral ajustado (OOF) | 0.821 | 0.883 | 0.851 | 0.930 | 0.992 |
 
-Se llama PR-AUC a AP en las tablas; se calcula con `average_precision_score`, no integración trapezoidal. El umbral se elige para maximizar F1 OOF, no recall explícitamente.
+Se llama PR-AUC a AP en las tablas; se calcula con `average_precision_score`, no integración trapezoidal. El umbral se elige para maximizar F1 OOF, no recall explícitamente. En prueba, el umbral ajustado detecta 4 fraudes más que el umbral por defecto (151 vs 147) a costa de 18 falsas alarmas más (33 vs 15) y de un F1 menor (0.851 vs 0.883); su uso depende de la capacidad de moderación.
 
-Agrupamiento: k=11; silhouette en muestra: K-Means 0.121, Ward 0.107. SVD conserva 27.9% de la varianza con 100 componentes. Estos resultados muestran separación limitada; los grupos se interpretan con términos y ejemplos, no como detectores definitivos de fraude.
+Agrupamiento: k=11; silhouette en muestra: K-Means 0.121, Ward 0.107. SVD conserva 27.9% de la varianza con 100 componentes. Dos grupos (1 y 6) reúnen 30.1 % de las ofertas y 78.2 % de los fraudes (669 de 856), mientras que enseñanza en el extranjero y aprendizaje no tienen fraude etiquetado. Isolation Forest da AP 0.097 (azar 0.049) y ROC-AUC 0.70. Estos resultados muestran separación limitada; los grupos se interpretan con términos y ejemplos, no como detectores definitivos de fraude.
 
 **Recomendación:** priorizar revisión humana con el clasificador; usar los temas como contexto. Límites: antigüedad e idioma del corpus, posibles etiquetas imperfectas, memorización de empresas, exploración histórica del mismo corpus en una versión previa y selección de parámetros previa a OOF. Consultar secciones 7–9 del notebook.
 
