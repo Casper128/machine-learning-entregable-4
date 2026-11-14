@@ -53,8 +53,6 @@ Se llama PR-AUC a AP en las tablas; se calcula con `average_precision_score`, no
 
 Agrupamiento: k=11; silhouette en muestra: K-Means 0.121, Ward 0.107. SVD conserva 27.9% de la varianza con 100 componentes. Dos grupos (1 y 6) reúnen 30.1 % de las ofertas y 78.2 % de los fraudes (669 de 856), mientras que enseñanza en el extranjero y aprendizaje no tienen fraude etiquetado. Isolation Forest da AP 0.097 (azar 0.049) y ROC-AUC 0.70. Estos resultados muestran separación limitada; los grupos se interpretan con términos y ejemplos, no como detectores definitivos de fraude.
 
-**Recomendación:** priorizar revisión humana con el clasificador; usar los temas como contexto. Límites: antigüedad e idioma del corpus, posibles etiquetas imperfectas, memorización de empresas, exploración histórica del mismo corpus en una versión previa y selección de parámetros previa a OOF. Consultar secciones 7–9 del notebook.
-
 ## Archivos
 
 - `evento4_fake_jobs.ipynb`: desarrollo ejecutado y resultados.
@@ -62,7 +60,3 @@ Agrupamiento: k=11; silhouette en muestra: K-Means 0.121, Ward 0.107. SVD conser
 - `descargar_datos.py` y `data/README.md`: obtención y huella del CSV; datos fuera de Git.
 - `results/`: métricas, perfiles, selección k y resumen de ejecución.
 - `figures/`: figuras regeneradas.
-
-## Verificación
-
-Notebook ejecutado desde cero con el CSV cuya huella SHA-256 es `59253295129d8b6a27607f9904f7d4ddf4dbb0ee35e079c7eb51b58b5e62bf60`. Versiones y métricas están en `results/resumen.json`; dependencias exactas en `requirements-lock.txt`. Las cifras corresponden a la ejecución completa del notebook.
